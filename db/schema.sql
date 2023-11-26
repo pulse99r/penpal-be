@@ -4,8 +4,28 @@ CREATE DATABASE penpal_dev;
 \c penpal_dev;
 
 
+DROP TABLE IF EXISTS users;  --  1
+DROP TABLE IF EXISTS membership; -- 2
+DROP TABLE IF EXISTS subscription_plans; -- 3
+DROP TABLE IF EXISTS profiles; -- 4
+DROP TABLE IF EXISTS other_characteristics; -- 5 
+DROP TABLE IF EXISTS friend_requests; -- 6
+DROP TABLE IF EXISTS friend_likes; -- 7
+DROP TABLE IF EXISTS messages; -- 8
+DROP TABLE IF EXISTS blogs; --9
+DROP TABLE IF EXISTS blog_likes; -- 10
+DROP TABLE IF EXISTS photos; -- 11
+DROP TABLE IF EXISTS photo_likes; -- 12
+DROP TABLE IF EXISTS rooms; -- 13
+DROP TABLE IF EXISTS products; -- 14
+DROP TABLE IF EXISTS product_imgs; -- 15
+DROP TABLE IF EXISTS product_likes; -- 16
+DROP TABLE IF EXISTS product_favorites; -- 17
+
+
+
+
 -- USER TABLES
-DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -18,52 +38,47 @@ CREATE TABLE users (
   create_date TIMESTAMP DEFAULT NOW()
 );
 
-DROP TABLE IF EXISTS membership;
-
 CREATE TABLE membership (
   id SERIAL PRIMARY KEY,
-  user_id INTEGER,
+  user_id INT,
   tier TEXT,
-  duration INTEGER,
+  duration INT,
   cost TEXT,
-  created_date TIMESTAMP DEFAULT NOW(),
-  start_date DATE(),
-  end_date DATE()
+  create_date TIMESTAMP DEFAULT NOW(),
+  start_date DATE,
+  end_date DATE
 );
-
-DROP TABLE IF EXISTS subscription_plans;
 
 CREATE TABLE subscription_plans (
   id SERIAL PRIMARY KEY,
-  ionian TEXT[],
-  dorian TEXT[],
-  phrygian TEXT[],
-  lydian TEXT[],
-  mixolydian TEXT[],
-  created_date TIMESTAMP DEFAULT NOW(),
-  acive BOOLEAN
+  intro_level VARCHAR[],
+  dorian VARCHAR[],
+  phrygian VARCHAR[],
+  lydian VARCHAR[],
+  ionian VARCHAR[],
+  create_date TIMESTAMP DEFAULT NOW(),
+  rate_active BOOLEAN
 );
-
-DROP TABLE IF EXISTS profiles;
 
 CREATE TABLE profiles (
   id SERIAL PRIMARY KEY,
-  user_id INTEGER,
+  user_id INT,
   gender VARCHAR(6),
-  age INTEGER, -- Calculated from DOB in users table
+  age INT, -- Calculated from DOB in users table
   -- Location
   city TEXT,
   state TEXT,
   country TEXT,
   -- Appearance
-  body_type TEXT, -- Slim, Thin, Average, Fit, Athletic, Large, A few extra pounds
+  body_type TEXT, 
+  -- body)type: Slim, Thin, Average, Fit, Athletic, Large, A few extra pounds
   height TEXT[], -- 5', 10" [ feet, inches ]
   eyes TEXT,
   hair TEXT,
   ethnicity TEXT,
   -- Lifestyle
-  smoking TEXT[],
-  drinking TEXT[],
+  smoking TEXT,
+  drinking TEXT,
   living_situation TEXT,
   tv_watching TEXT,
   religion TEXT,
@@ -82,11 +97,13 @@ CREATE TABLE profiles (
   headline TEXT,
   about_me TEXT,
   looking_for TEXT,
+  create_date TIMESTAMP DEFAULT NOW()
 );
 
-DROP TABLE IF EXISTS other_characteristics; 
-  -- Other Characteristics - favorites activities
+-- Other Characteristics - favorites activities
 CREATE TABLE other_characteristics (
+  user_id INT, 
+  profiles_id INT,
   songs TEXT[],
   movies TEXT[],
   instruments_i_play TEXT[],
@@ -94,80 +111,76 @@ CREATE TABLE other_characteristics (
   sports_i_play TEXT[],
   vacation_spots TEXT[],
   foods TEXT[],
-  created_date TIMESTAMP DEFAULT NOW()
-);
-
-DROP TABLE IF EXISTS friends;
-CREATE TABLE friends (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER,
-  friend_id INTEGER,
   create_date TIMESTAMP DEFAULT NOW()
 );
 
-DROP TABLE IF EXISTS friend_likes;
+CREATE TABLE friend_requests (
+  id SERIAL PRIMARY KEY,
+  sender_id INT,
+  recipient_id INT,
+  request_status TEXT, -- Sent, Accepted, Denied
+  create_date TIMESTAMP DEFAULT NOW()
+);
+
 CREATE TABLE friend_likes (
   id SERIAL PRIMARY KEY,
-  user_id INTEGER,
-  friend_id INTEGER,
+  user_id INT,
+  friend_id INT,
+  request_status TEXT,
   like_icon TEXT, -- :smiley, :heart, :double_heart, :thumbs_up, :hands_clapping
   create_date TIMESTAMP DEFAULT NOW()
 );
 
 -- MESSAGES - are addressed one-on-one from a sender to recipient
-DROP TABLE IF EXISTS messages;
 CREATE TABLE messages (
   id SERIAL PRIMARY KEY,
-  parent_id INTEGER,
-  sender_id INTEGER,
-  recipient_id INTEGER,
-  body INTEGER,
-  date_sent TIMESTAMP DEFAULT NOW(),
+  parent_id INT,
+  sender_id INT,
+  recipient_id INT[],
+  body VARCHAR(300),
+  create_date TIMESTAMP DEFAULT NOW(),
   msg_read BOOLEAN
 );
 
 -- BLOGS -  blog posts are posted in a blog forum
-DROP TABLE IF EXISTS blogs;
 CREATE TABLE blogs (
   id SERIAL PRIMARY KEY,
-  parent_id INTEGER, -- Comments have parent ids
+  parent_id INT, -- Comments have parent ids
   topic TEXT,
-  body INTEGER,
-  user_id INTEGER,
+  body TEXT,
+  user_id INT,
   date_created TIMESTAMP DEFAULT NOW() 
 );
 
-DROP TABLE IF EXISTS blog_likes;
-CREATE TABLE blogs (
+CREATE TABLE blog_likes (
   id SERIAL PRIMARY KEY,
-  user_id INTEGER,
-  blog_id INTEGER,
-  like_icon TEXT, -- :smiley, :heart, :double_heart, :thumbs_up, :hands_clapping
+  user_id INT,
+  blog_id INT,
+  like_icon TEXT, 
+  -- like_icons are :smiley, :heart, :double_heart, :thumbs_up, :hands_clapping
   date_created TIMESTAMP DEFAULT NOW() 
 );
 
 -- PHOTO ALBUMS -  
-DROP TABLE IF EXISTS photos;
 CREATE TABLE photos (
   id SERIAL PRIMARY KEY,
-  user_id INTEGER,
+  user_id INT,
   album_name TEXT,
   photo_url TEXT,
   photo_description TEXT,
   date_created TIMESTAMP DEFAULT NOW()
 );
 
-DROP TABLE IF EXISTS photo_likes;
 CREATE TABLE photo_likes (
   id SERIAL PRIMARY KEY,
-  photo_id INTEGER,
-  like_icon TEXT, -- :smiley, :heart, :double_heart, :thumbs_up, :hands_clapping
+  photo_id INT,
+  like_icon TEXT, 
+  -- like_icons are :smiley, :heart, :double_heart, :thumbs_up, :hands_clapping
   date_created TIMESTAMP DEFAULT NOW() 
 );
 
 -- CHAT ROOMS - the rooms are persistent...however posts disappear as soon as everyone leaves a room
 -- posts are handled as a hash in a REACT Component
-DROP TABLE IF EXISTS rooms;
 CREATE TABLE rooms (
   id SERIAL PRIMARY KEY,
   category TEXT,
@@ -177,15 +190,14 @@ CREATE TABLE rooms (
 );
 
 -- PRODUCTS TABLE - Stores products for viewing
-DROP TABLE IF EXISTS products;
 CREATE TABLE products (
   id SERIAL PRIMARY KEY,
   product_url TEXT,
   product_description TEXT,
-  sales_start DATE(),
-  sales_end DATE(),
-  volume_on_hand INTEGER,
-  volume_sold INTEGER,
+  sales_start DATE,
+  sales_end DATE,
+  volume_on_hand INT,
+  volume_sold INT,
   cost DECIMAL,
   price DECIMAL,
   affiliate_fee DECIMAL,
@@ -193,24 +205,22 @@ CREATE TABLE products (
 );
 
 -- PRODUCT IMAGES 
-DROP TABLE IF EXISTS product_imgs;
 CREATE TABLE product_imgs (
   id SERIAL PRIMARY KEY,
   img TEXT,
-  products.id INTEGER
+  products_id INT
 );
-DROP TABLE IF EXISTS product_likes;
+
 CREATE TABLE product_likes (
   id SERIAL PRIMARY KEY,
-  products.id,
-  user_id INTEGER,
+  products_id INT,
+  user_id INT,
   like_icon TEXT
 );
 
-DROP TABLE IF EXISTS product_favorites;
 CREATE TABLE product_favorites (
   id SERIAL PRIMARY KEY,
-  products.id, -- FKey
-  user_id INTEGER, --FKey
+  products_id INT, -- FKey
+  user_id INT, --FKey
   favorite BOOLEAN
 );
