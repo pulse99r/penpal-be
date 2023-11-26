@@ -1,9 +1,13 @@
-const app = require("./app");
 
+
+// DEPENDENCIES
+const app = require("./app.js");
+
+// CONFIGURATION
 require("dotenv").config();
+const PORT = process.env.PORT;
 
-const PORT = process.env.PORT || 3002;
-
+// LISTEN
 app.listen(PORT, () => {
-  console.log(`Listening on port: ${PORT}`);
+  console.log(`Penpal Backend Server is Listening on port ${PORT}`);
 });
