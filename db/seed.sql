@@ -1,33 +1,37 @@
 \c penpal_dev;
 
-INSERT INTO users (first_name, last_name, email, phone, dob, password_hash, create_date) VALUES
-( 'Adam', 'Andrews', 'adam@gmail.com', '212-212-2120', to_date('10/23/1974','MM/DD/YYYY HH24:MI'), 'abc111', CURRENT_TIMESTAMP ),
-( 'Benjamin', 'Bratt', 'bbratt@gmail.com', '212-212-2121', to_date('09/27/1998','MM/DD/YYYY HH24:MI'), 'abc222', CURRENT_TIMESTAMP ),
-( 'Charles', 'Chaplain', 'charles@gmail.com', '212-212-2122', to_date('07/18/1996','MM/DD/YYYY HH24:MI'), 'abc333', CURRENT_TIMESTAMP ),
-( 'David', 'Daniels', 'david@gmail.com', '212-212-2122', to_date('09/18/1996','MM/DD/YYYY HH24:MI'), 'abc444', CURRENT_TIMESTAMP ),
-( 'Edward', 'Everett', 'edwardE@gmail.com', '212-212-2122', to_date('01/29/1996','MM/DD/YYYY HH24:MI'), 'abc555', CURRENT_TIMESTAMP ),
-( 'Fred', 'Feldman', 'fred@gmail.com', '212-212-2123', to_date('12/02/1995','MM/DD/YYYY HH24:MI'), 'abc666', CURRENT_TIMESTAMP ),
-( 'Greg', 'Gerard', 'greg@gmail.com', '212-212-2123', to_date('10/2/1984','MM/DD/YYYY HH24:MI'), 'abc777', CURRENT_TIMESTAMP ),
-( 'Harry', 'Houdini', 'harry@gmail.com', '212-212-2123', to_date('01/14/1973','MM/DD/YYYY HH24:MI'), 'abc888', CURRENT_TIMESTAMP ),
-( 'Izzy', 'Imani', 'harry@gmail.com', '212-212-2123', to_date('03/04/1987','MM/DD/YYYY HH24:MI'), 'abc999', CURRENT_TIMESTAMP ),
-( 'John', 'Jameson', 'harry@gmail.com', '212-212-2123', to_date('12/02/1987','MM/DD/YYYY HH24:MI'), 'abc1010', CURRENT_TIMESTAMP ),
-( 'Karen', 'Kowalski', 'harry@gmail.com', '212-212-2123', to_date('07/05/1994','MM/DD/YYYY HH24:MI'), 'abc1111', CURRENT_TIMESTAMP ),
-( 'Les', 'Lawrence', 'harry@gmail.com', '212-212-2123', to_date('10/02/1988','MM/DD/YYYY HH24:MI'), 'abc1212', CURRENT_TIMESTAMP ),
-( 'Mary', 'Monina', 'harry@gmail.com', '212-212-2123', to_date('09/02/2001','MM/DD/YYYY HH24:MI'), 'abc1313', CURRENT_TIMESTAMP ),
-( 'Nora', 'Nilland', 'harry@gmail.com', '212-212-2123', to_date('07/09/1984','MM/DD/YYYY HH24:MI'), 'abc1414', CURRENT_TIMESTAMP );
+INSERT INTO users (first_name, last_name, email, phone, dob, password_hash, create_date) 
+  VALUES
+  ( 'Adam', 'Andrews', 'adam@gmail.com', '212-212-2120', to_date('10/23/1974','MM/DD/YYYY HH24:MI'), 'abc111', CURRENT_TIMESTAMP ),
+  ( 'Benjamin', 'Bratt', 'bbratt@gmail.com', '212-212-2121', to_date('09/27/1998','MM/DD/YYYY HH24:MI'), 'abc222', CURRENT_TIMESTAMP ),
+  ( 'Charles', 'Chaplain', 'charles@gmail.com', '212-212-2122', to_date('07/18/1996','MM/DD/YYYY HH24:MI'), 'abc333', CURRENT_TIMESTAMP ),
+  ( 'David', 'Daniels', 'david@gmail.com', '212-212-2122', to_date('09/18/1996','MM/DD/YYYY HH24:MI'), 'abc444', CURRENT_TIMESTAMP ),
+  ( 'Edward', 'Everett', 'edwardE@gmail.com', '212-212-2122', to_date('01/29/1996','MM/DD/YYYY HH24:MI'), 'abc555', CURRENT_TIMESTAMP ),
+  ( 'Fred', 'Feldman', 'fred@gmail.com', '212-212-2123', to_date('12/02/1995','MM/DD/YYYY HH24:MI'), 'abc666', CURRENT_TIMESTAMP ),
+  ( 'Greg', 'Gerard', 'greg@gmail.com', '212-212-2123', to_date('10/2/1984','MM/DD/YYYY HH24:MI'), 'abc777', CURRENT_TIMESTAMP ),
+  ( 'Harry', 'Houdini', 'harry@gmail.com', '212-212-2123', to_date('01/14/1973','MM/DD/YYYY HH24:MI'), 'abc888', CURRENT_TIMESTAMP ),
+  ( 'Izzy', 'Imani', 'harry@gmail.com', '212-212-2123', to_date('03/04/1987','MM/DD/YYYY HH24:MI'), 'abc999', CURRENT_TIMESTAMP ),
+  ( 'John', 'Jameson', 'harry@gmail.com', '212-212-2123', to_date('12/02/1987','MM/DD/YYYY HH24:MI'), 'abc1010', CURRENT_TIMESTAMP ),
+  ( 'Karen', 'Kowalski', 'harry@gmail.com', '212-212-2123', to_date('07/05/1994','MM/DD/YYYY HH24:MI'), 'abc1111', CURRENT_TIMESTAMP ),
+  ( 'Les', 'Lawrence', 'harry@gmail.com', '212-212-2123', to_date('10/02/1988','MM/DD/YYYY HH24:MI'), 'abc1212', CURRENT_TIMESTAMP ),
+  ( 'Mary', 'Monina', 'harry@gmail.com', '212-212-2123', to_date('09/02/2001','MM/DD/YYYY HH24:MI'), 'abc1313', CURRENT_TIMESTAMP ),
+  ( 'Nora', 'Nilland', 'harry@gmail.com', '212-212-2123', to_date('07/09/1984','MM/DD/YYYY HH24:MI'), 'abc1414', CURRENT_TIMESTAMP );
 
-INSERT INTO membership (user_id, tier, duration, cost, create_date, start_date, end_date ) VALUES
-( '1', 'ionian', NULL, '0.00', CURRENT_TIMESTAMP, '11/24/2023', NULL ),
-( '2', 'ionian', NULL, '0.00', CURRENT_TIMESTAMP, '11/24/2023', NULL ),
-( '3', 'dorian', 30, '14.99', CURRENT_TIMESTAMP, '11/24/2023', '02/24/2024' ),
-( '4', 'phrygian', 60, '28.99', CURRENT_TIMESTAMP, '11/24/2023', '05/24/2024'),
-( '5', 'dorian', 30, '14.99', CURRENT_TIMESTAMP, '11/24/2023', '02/24/2024' ),
-( '6', 'ionian', NULL, '0.00', CURRENT_TIMESTAMP, '11/24/2023', NULL );
+INSERT INTO membership (user_id, tier, duration, cost, create_date, start_date, end_date ) 
+VALUES
+  ( '1', 'ionian', NULL, '0.00', CURRENT_TIMESTAMP, '11/24/2023', NULL ),
+  ( '2', 'ionian', NULL, '0.00', CURRENT_TIMESTAMP, '11/24/2023', NULL ),
+  ( '3', 'dorian', 30, '14.99', CURRENT_TIMESTAMP, '11/24/2023', '02/24/2024' ),
+  ( '4', 'phrygian', 60, '28.99', CURRENT_TIMESTAMP, '11/24/2023', '05/24/2024'),
+  ( '5', 'dorian', 30, '14.99', CURRENT_TIMESTAMP, '11/24/2023', '02/24/2024' ),
+  ( '6', 'ionian', NULL, '0.00', CURRENT_TIMESTAMP, '11/24/2023', NULL );
 
-INSERT INTO subscription_plans ( intro_level, dorian, phrygian, lydian, ionian, create_date, rate_active ) VALUES
-( '{"0.00", NULL}', '{"14.99", "30"}', '{"28.99", "60"}', '{"41.99", "90"}', '{"69.99", "180"}', CURRENT_TIMESTAMP, true );
+INSERT INTO subscription_plans ( intro_level, dorian, phrygian, lydian, ionian, create_date, rate_active ) 
+VALUES
+  ( '{"0.00", NULL}', '{"14.99", "30"}', '{"28.99", "60"}', '{"41.99", "90"}', '{"69.99", "180"}', CURRENT_TIMESTAMP, true );
 
-INSERT INTO profiles (user_id, gender, age, city, state, country, body_type, height, eyes, hair, ethnicity, smoking, drinking, living_situation, tv_watching, religion, marital_status, have_kids, wants_kids, education, employment_status, occupation, sense_of_humor, interest, phone, headline, about_me, looking_for, create_date ) VALUES
+INSERT INTO profiles (user_id, gender, age, city, state, country, body_type, height, eyes, hair, ethnicity, smoking, drinking, living_situation, tv_watching, religion, marital_status, have_kids, wants_kids, education, employment_status, occupation, sense_of_humor, interest, phone, headline, about_me, looking_for, create_date ) 
+VALUES
   ( 1,'Woman', 23, 'Cebu','Central Visayas','Phillippines', 'Slim', '{"5", "7"}', 'Brown', 'Black', 'Asian', 'No', 'Sometimes','Alone', '{"Drama","Comedy","SciFi", "True Crime"}', 'Christian', 'Single', 'No', 'Yes', 'Some College', 'Employed', 'Sales Associate', 'Funny', '{"Computers","Dancing","Cooking","Talking","Walking"}', '123-456-7890', 'Looking for Great PenPal!', 'Caring woman, enjoys getting to know people. I enjoy a siimple life.', 'Looking for a penpal', CURRENT_TIMESTAMP),
   ( 2,'Woman', 21, 'San Juan','Ilocos','Phillippines', 'Slim', '{"5", "7"}', 'Brown', 'Black', 'Asian', 'No', 'Sometimes','Alone', '{"Drama","Comedy","SciFi", "True Crime"}', 'Christian', 'Single', 'No', 'Yes', 'Some College', 'Employed', 'Sales Associate', 'Funny', '{"Computers","Dancing","Cooking","Talking","Walking"}', '123-456-7890', 'Looking for Great PenPal!', 'Caring woman, enjoys getting to know people. I enjoy a siimple life.', 'Looking for a penpal who will write to me!', CURRENT_TIMESTAMP),
   ( 3,'Woman', 19, 'Quezon','Southern Tagalog','Phillippines', 'Slim', '{"5", "2"}', 'Brown', 'Black', 'Asian', 'No', 'Sometimes','Alone', '{"Drama","Comedy","SciFi", "True Crime"}', 'Christian', 'Single', 'No', 'Yes', 'Some College', 'Employed', 'Sales Associate', 'Funny', '{"Computers","Dancing","Cooking","Talking","Walking"}', '123-456-7890', 'Looking for Great PenPal!', 'Caring woman, enjoys getting to know people. I enjoy a siimple life.', 'Looking for a penpal who will write to me!', CURRENT_TIMESTAMP),

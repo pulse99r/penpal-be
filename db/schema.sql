@@ -3,7 +3,6 @@ CREATE DATABASE penpal_dev;
 
 \c penpal_dev;
 
-
 DROP TABLE IF EXISTS users;  --  1
 DROP TABLE IF EXISTS membership; -- 2
 DROP TABLE IF EXISTS subscription_plans; -- 3
@@ -21,8 +20,6 @@ DROP TABLE IF EXISTS products; -- 14
 DROP TABLE IF EXISTS product_imgs; -- 15
 DROP TABLE IF EXISTS product_likes; -- 16
 DROP TABLE IF EXISTS product_favorites; -- 17
-
-
 
 
 -- USER TABLES

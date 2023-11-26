@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:pwHash', async (req, res) => {
+router.get('/:password_hash', async (req, res) => {
   const pwHash = req.params.password_hash
   const profile = await getProfileByPw(pwHash);
 
